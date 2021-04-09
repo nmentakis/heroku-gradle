@@ -24,7 +24,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -34,7 +37,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
 
-@Controller
+@RestController
 @SpringBootApplication
 public class HerokuApplication {
 
@@ -48,10 +51,11 @@ public class HerokuApplication {
     SpringApplication.run(HerokuApplication.class, args);
   }
 
-  @RequestMapping("/")
-  String index() {
-    return "index";
+  @GetMapping("/welcome")
+  String welcome() {
+    return "Hello, World!";
   }
+
 
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
